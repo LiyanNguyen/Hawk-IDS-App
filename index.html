@@ -1,0 +1,289 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Live Network Traffic</title>
+</head>
+
+<!--Bootstrap CSS-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+	integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+<!--Font Awesome JS-->
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"></script>
+
+<!--Custom CSS-->
+<link rel="stylesheet" href="custom.css">
+
+<body id="body" class="sky-blue">
+	<!--Navbar Component-->
+	<nav class="navbar navbar-expand-lg navbar-dark navy-blue fixed-top">
+		<div class="container-fluid">
+			<div class="dropdown">
+				<button class="btn snow-white" type="button" data-bs-toggle="dropdown"><i
+						class="fas fa-caret-down"></i></button>
+				<ul class="dropdown-menu snow-white">
+					<li class=""><a class="dropdown-item" href="#">Live Network Traffic</a></li>
+					<hr class="my-1 mx-2">
+					<li class=""><a class="dropdown-item" href="hnd.html">Historical Network Data</a></li>
+					<hr class="my-1 mx-2">
+					<li class=""><a class="dropdown-item" href="qc.html">Quarantine Control</a></li>
+					<hr class="my-1 mx-2">
+					<li class=""><a class="dropdown-item">Logout</a></li>
+				</ul>
+			</div>
+			<h5 class="text-white text-center col">Live Network Traffic&emsp;&ensp;</h3>
+		</div>
+	</nav>
+	<!--Line Seperator (start)-->
+	<hr class="mx-2" style="margin-top: 4.5rem; color: #647380;">
+	<!--Alert Components-->
+	<div class="row mx-2">
+		<!--Warning Alert-->
+		<div class="alert alert-warning alert-dismissible" role="alert">
+			<i class="fas fa-exclamation-triangle"></i>
+			Traffic under <span class="fst-italic text-decoration-underline">medium priority</span> has entered the system!
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+
+		<!--Danger Alert-->
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<i class="fas fa-skull-crossbones"></i>
+			Traffic under <span class="fst-italic text-decoration-underline">high priority</span> has entered the system!
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+	</div>
+	<!--LNT  Traffic Volume and Traffic Types Component-->
+	<div class="row mx-0 g-3">
+		<div class="col-md-6">
+			<div class="card snow-white">
+				<h6 class="card-header else-blue text-white">
+					<i class="fas fa-chart-bar"></i> Traffic Volume
+				</h6>
+				<div class="card-body">
+					<div style="height: 40vh;">
+						<canvas id="TFVC"></canvas>
+					</div>
+					<p class="card-text fst-italic text-muted text-center">Chart will update in 59 second(s)</p>
+					<hr>
+					<select id="test" class="form-select">
+						<option value="0">Overall</option>
+						<option value="1">India</option>
+						<option value="2">Russia</option>
+						<option value="3">China</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card snow-white">
+				<h6 class="card-header else-blue text-white">
+					<i class="fas fa-list-ul"></i> Traffic Types
+				</h6>
+				<div class="card-body">
+					<div style="height: 40vh;">
+						<canvas id="myChart2"></canvas>
+					</div>
+					<p class="card-text fst-italic text-muted text-center">Chart will update in 59 second(s)</p>
+					<hr>
+					<select class="form-select">
+						<option value="0">Overall</option>
+						<option value="1">India</option>
+						<option value="2">Russia</option>
+						<option value="3">China</option>
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--LNT  Real-Time Traffic Component-->
+	<div class="card snow-white mx-2 my-3">
+		<h6 class="card-header else-blue text-white">
+			<i class="fas fa-clock"></i> Real-Time Traffic
+		</h6>
+		<div class="card-body">
+			<button type="button" class="btn sky-blue mb-3"><i class="far fa-pause-circle"></i> Pause</button>
+			<button type="button" class="btn sky-blue mb-3"><i class="far fa-play-circle"></i> Resume</button>
+			<div class="table-responsive" style="overflow-x:auto;">
+				<table class="table table-bordered table-hover">
+					<thead>
+						<tr>
+							<th>Date-time</th>
+							<th>Sig</th>
+							<th>Req</th>
+							<th>Classif</th>
+							<th>Auth</th>
+							<th>Prio</th>
+							<th>Protocol</th>
+							<th>Src-IP</th>
+							<th>Src-Port</th>
+							<th>Dest-IP</th>
+							<th>Dest-Port</th>
+							<th>Country</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+						<tr>
+							<td>{value 1}</td>
+							<td>{value 2}</td>
+							<td>{value 3}</td>
+							<td>{value 4}</td>
+							<td>{value 5}</td>
+							<td>{value 6}</td>
+							<td>{value 7}</td>
+							<td>{value 8}</td>
+							<td>{value 9}</td>
+							<td>{value 10}</td>
+							<td>{value 11}</td>
+							<td>{value 12}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<!--Line Seperator (end)-->
+	<hr class="mx-2" style="margin-top: 1rem; color: #647380;">
+
+	<!--Chart JS-->
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+	<!--Bootstrap JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+		crossorigin="anonymous"></script>
+
+	<!--Chart JS Config-->
+	<script src="live-chart-config.js"></script>
+
+</body>
+
+</html>
