@@ -10,10 +10,88 @@ let rand3 = () => {
   return Math.round(Math.random() * 1000);
 };
 
-renderHistoricalTrafficVolumeChart();
-renderHistoricalTrafficTypesChart();
+let rand4 = () => {
+  return Math.round(Math.random() * 100000 + 100000);
+};
 
-function renderHistoricalTrafficVolumeChart() {
+let progressValue = 0;
+let IntervalTimer;
+
+// renderHTVC();
+// renderHTTC();
+
+// renderNewHTVC();
+// setTimeout(renderNewHTTC, 3000);
+
+let tabledata = document.querySelector("#table-data");
+for (let i = 0; i < 10; i++) {
+  tabledata.innerHTML += `<tr>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+    									</tr>`;
+}
+
+loadDatabaseAnimation();
+
+IntervalTimer = setInterval(loadDatabaseAnimation, 50);
+
+function loadDatabaseAnimation() {
+  let progressBar = document.querySelector("#prog-bar");
+  let dbsize = document.querySelector("#dbsize-info");
+  let totalrecords = document.querySelector("#totalrecords-info");
+  let recordsfound = document.querySelector("#recordsfound-info");
+  let recordspan = document.querySelector("#recordspan-info");
+
+  progressBar.style.width = `${progressValue}%`;
+  progressBar.innerHTML = `${progressValue}%`;
+  progressValue++;
+
+  //when the loading finished animation
+  if (progressValue == 101) {
+    clearInterval(IntervalTimer);
+    renderHTVC();
+    renderHTTC();
+    progressValue = 0;
+
+    document.querySelector(
+      "#DBLoadAnimation"
+    ).innerHTML = `<div class="d-flex justify-content-center my-2">Database Succesfully Loaded!</div>
+				<div class="progress">
+					<div id="prog-bar" class="progress-bar bg-success"
+						style="width: 100%;">
+						<div class="d-flex justify-content-center">Done!</div>
+					</div>
+				</div>`;
+
+    dbsize.classList.remove("placeholder");
+    dbsize.innerHTML = `${rand()} MB`;
+
+    totalrecords.classList.remove("placeholder");
+    totalrecords.innerHTML = `${rand4()}`;
+
+    recordspan.classList.remove("placeholder");
+    recordspan.innerHTML = `3 Months`;
+
+    recordsfound.classList.remove("placeholder");
+    recordsfound.innerHTML = `${totalrecords.innerHTML} Records Found`;
+  }
+}
+
+function renderHTVC() {
+  document.querySelector(
+    "#HTVCContainer"
+  ).innerHTML = `<canvas id="HTVC"></canvas>`;
+
   let HTVC = document.querySelector("#HTVC");
   let ConfigHTVC = new Chart(HTVC, {
     type: "bar",
@@ -75,7 +153,11 @@ function renderHistoricalTrafficVolumeChart() {
   });
 }
 
-function renderHistoricalTrafficTypesChart() {
+function renderHTTC() {
+  document.querySelector(
+    "#HTTCContainer"
+  ).innerHTML = `<canvas id="HTTC"></canvas>`;
+
   let HTTC = document.querySelector("#HTTC");
   let ConfigHTTC = new Chart(HTTC, {
     type: "radar",
