@@ -113,8 +113,7 @@
 							</select>
 						</div>
 						<div class="row mt-3 mx-0">
-							<button type="button" class="btn sky-blue col-12" onclick="renderHTVC();">Search
-								Traffic Volume</button>
+							<button type="button" class="btn sky-blue col-12 disabled" onclick="renderHTVC();">Search Traffic Volume</button>
 						</div>
 					</div>
 				</div>
@@ -165,7 +164,7 @@
 							</select>
 						</div>
 						<div class="row mt-3 mx-0">
-							<button type="button" class="btn sky-blue col-12" onclick="renderHTTC();"">Search Traffic Types</button>
+							<button type="button" class="btn sky-blue col-12 disabled" onclick="renderHTTC();"">Search Traffic Types</button>
 						</div>
 					</div>
 				</div>
@@ -389,7 +388,7 @@
 				</div>
 			</div>
 		</div>
-		<button type="button" class="btn sky-blue col-12 mt-2">Search Database</button>
+		<button type="button" class="btn sky-blue col-12 mt-2 disabled" onclick="renderQueryTotal();renderTableData()">Search Database</button>
 	</div>
 
 	<!--HND  Database Search Result Component-->
@@ -429,15 +428,8 @@
 			<hr>
 			<nav>
 				<ul class="pagination justify-content-center">
-					<li class="page-item"><a class="page-link">&laquo;</a></li>
-					<li class="page-item"><a class="page-link">&lt;</a></li>
-					<li class="page-item"><a class="page-link">1</a></li>
-					<li class="page-item"><a class="page-link">2</a></li>
-					<li class="page-item"><a class="page-link">3</a></li>
-					<li class="page-item"><a class="page-link">&gt;</a></li>
-					<li class="page-item"><a class="page-link">&raquo;</a></li>
-					<li class="page-item disabled"><a class="page-link">&nbsp;</a></li>
-					<li class="page-item"><button class="page-link">&Rsh;</button></li>
+					<li class="page-item"><button class="btn page-link sky-blue text-dark disabled" onclick="renderTableData()">&laquo; Prev</button></li>
+					<li class="page-item"><button class="btn page-link sky-blue text-dark disabled" onclick="renderTableData()">Next &raquo;</button></li>
 				</ul>
 			</nav>
 		</div>

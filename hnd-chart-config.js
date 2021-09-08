@@ -14,43 +14,157 @@ let rand4 = () => {
   return Math.round(Math.random() * 100000 + 100000);
 };
 
+let rand5 = () => {
+  return Math.round(Math.random() * 10000 + 10000);
+};
+
+let randDay = () => {
+  return Math.round(Math.random() * 30 + 1);
+};
+
+let randMonth = () => {
+  return Math.round(Math.random() * 12 + 1);
+};
+
+let randYear = () => {
+  return Math.round(Math.random() * 20 + 2000);
+};
+
+let randHour = () => {
+  return Math.round(Math.random() * 23);
+};
+
+let randMinute = () => {
+  return Math.round(Math.random() * 59);
+};
+
+let rand120 = () => {
+  return Math.round(Math.random() * 119 + 1);
+};
+
+let rand50 = () => {
+  return Math.round(Math.random() * 49 + 1);
+};
+
+let rand10 = () => {
+  return Math.round(Math.random() * 9 + 1);
+};
+
+let rand255 = () => {
+  return Math.round(Math.random() * 254 + 1);
+};
+
+let rand100to600 = () => {
+  return Math.round(Math.random() * 499 + 100);
+};
+
+let rand1to1024 = () => {
+  return Math.round(Math.random() * 1023 + 1);
+};
+
+let randClassifPicker = () => {
+  return Math.round(Math.random() * (ClassifValues.length - 1));
+};
+
+let randAuthPicker = () => {
+  return Math.round(Math.random() * (AuthValues.length - 1));
+};
+
+let randProtocolPicker = () => {
+  return Math.round(Math.random() * (ProtocolValues.length - 1));
+};
+
+let randCountryPicker = () => {
+  return Math.round(Math.random() * (CountryValues.length - 1));
+};
+
+let ClassifValues = [
+  "Unknown Traffic",
+  "Normal Traffic",
+  "Supicious Traffic",
+  "Harmful Traffic",
+];
+
+let CountryValues = ["United States", "India", "Russia", "China"];
+
+let AuthValues = [
+  "PPP",
+  "PAP",
+  "CHAP",
+  "EAP",
+  "EAP-MD5",
+  "EAP-TLS",
+  "EAP-TTLS",
+  "EAP-FAST",
+  "EAP-PEAP",
+  "AAA",
+  "TACACS+",
+  "RADIUS",
+  "DIAMETER",
+  "AKA",
+  "CRAM-MD5",
+  "CAVE",
+  "NTLM",
+  "SAML",
+];
+
+let ProtocolValues = [
+  "TCP",
+  "UDP",
+  "IP",
+  "POP",
+  "SMTP",
+  "FTP",
+  "HTTP",
+  "HTTPS",
+  "ARP",
+  "DHCP",
+  "IMAP4",
+  "SIP",
+  "RTP",
+  "RLP",
+  "RAP",
+  "L2TP",
+  "PPTP",
+  "SNMP",
+  "TFTP",
+];
+
 let progressValue = 0;
 let IntervalTimer;
 
-// renderHTVC();
-// renderHTTC();
+let progressBar = document.querySelector("#prog-bar");
+let dbsize = document.querySelector("#dbsize-info");
+let totalrecords = document.querySelector("#totalrecords-info");
+let recordsfound = document.querySelector("#recordsfound-info");
+let recordspan = document.querySelector("#recordspan-info");
 
-// renderNewHTVC();
-// setTimeout(renderNewHTTC, 3000);
+console.log(randAuthPicker());
 
 let tabledata = document.querySelector("#table-data");
 for (let i = 0; i < 10; i++) {
   tabledata.innerHTML += `<tr>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    										<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
-    									</tr>`;
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+			<td class="placeholder-glow"><span class="placeholder col-12"></span></td>
+		</tr>`;
 }
 
-loadDatabaseAnimation();
+onPageLoadAnimation();
 
-IntervalTimer = setInterval(loadDatabaseAnimation, 20);
+IntervalTimer = setInterval(onPageLoadAnimation, 20);
 
-function loadDatabaseAnimation() {
-  let progressBar = document.querySelector("#prog-bar");
-  let dbsize = document.querySelector("#dbsize-info");
-  let totalrecords = document.querySelector("#totalrecords-info");
-  let recordsfound = document.querySelector("#recordsfound-info");
-  let recordspan = document.querySelector("#recordspan-info");
+function onPageLoadAnimation() {
+  
 
   progressBar.style.width = `${progressValue}%`;
 
@@ -77,6 +191,11 @@ function loadDatabaseAnimation() {
 					</div>
 				</div>`;
 
+    //re-enable all disabled buttons
+    let disabledButtons = document.querySelectorAll(".btn.disabled");
+    disabledButtons.forEach((buttons) => {buttons.classList.remove("disabled")});
+
+    //remove placeholders and plugin random data
     dbsize.classList.remove("placeholder");
     dbsize.innerHTML = `${rand()} MB`;
 
@@ -87,7 +206,34 @@ function loadDatabaseAnimation() {
     recordspan.innerHTML = `3 Months`;
 
     recordsfound.classList.remove("placeholder");
-    recordsfound.innerHTML = `${totalrecords.innerHTML} Records Found`;
+    recordsfound.innerHTML = `${totalrecords.innerHTML} Total Records Found`;
+    
+    renderTableData();
+  }
+}
+
+function renderQueryTotal() {
+  recordsfound.innerHTML = `${rand5()} Records Found`;
+}
+
+function renderTableData() {
+  tabledata.innerHTML = ``;
+  
+  for (let i = 0; i < 10; i++) {
+    tabledata.innerHTML += `<tr>
+			<td>${randDay()}/${randMonth()}/${randYear()} - ${randHour()}:${randMinute()}</td>
+			<td>${rand120()}:${rand50()}:${rand10()}</td>
+			<td>${rand100to600()}</td>
+			<td>${ClassifValues[randClassifPicker()]}</td>
+			<td>${AuthValues[randAuthPicker()]}</td>
+			<td>${rand10()}</td>
+			<td>${ProtocolValues[randProtocolPicker()]}</td>
+			<td>${rand255()}.${rand255()}.${rand255()}.${rand255()}</td>
+			<td>${rand1to1024()}</td>
+			<td>${rand255()}.${rand255()}.${rand255()}.${rand255()}</td>
+			<td>${rand1to1024()}</td>
+			<td>${CountryValues[randCountryPicker()]}</td>
+		</tr>`;
   }
 }
 
