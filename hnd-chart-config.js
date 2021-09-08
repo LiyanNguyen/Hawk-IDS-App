@@ -1,83 +1,3 @@
-let rand = () => {
-  return Math.round(Math.random() * 1000 + 1000);
-};
-
-let rand2 = () => {
-  return Math.round(Math.random() * 300 + 200);
-};
-
-let rand3 = () => {
-  return Math.round(Math.random() * 1000);
-};
-
-let rand4 = () => {
-  return Math.round(Math.random() * 100000 + 100000);
-};
-
-let rand5 = () => {
-  return Math.round(Math.random() * 10000 + 10000);
-};
-
-let randDay = () => {
-  return Math.round(Math.random() * 30 + 1);
-};
-
-let randMonth = () => {
-  return Math.round(Math.random() * 12 + 1);
-};
-
-let randYear = () => {
-  return Math.round(Math.random() * 20 + 2000);
-};
-
-let randHour = () => {
-  return Math.round(Math.random() * 23);
-};
-
-let randMinute = () => {
-  return Math.round(Math.random() * 59);
-};
-
-let rand120 = () => {
-  return Math.round(Math.random() * 119 + 1);
-};
-
-let rand50 = () => {
-  return Math.round(Math.random() * 49 + 1);
-};
-
-let rand10 = () => {
-  return Math.round(Math.random() * 9 + 1);
-};
-
-let rand255 = () => {
-  return Math.round(Math.random() * 254 + 1);
-};
-
-let rand100to600 = () => {
-  return Math.round(Math.random() * 499 + 100);
-};
-
-let rand1to1024 = () => {
-  return Math.round(Math.random() * 1023 + 1);
-};
-
-let randClassifPicker = () => {
-  return Math.round(Math.random() * (ClassifValues.length - 1));
-};
-
-let randAuthPicker = () => {
-  return Math.round(Math.random() * (AuthValues.length - 1));
-};
-
-let randProtocolPicker = () => {
-  return Math.round(Math.random() * (ProtocolValues.length - 1));
-};
-
-let randCountryPicker = () => {
-  return Math.round(Math.random() * (CountryValues.length - 1));
-};
-
 let ClassifValues = [
   "Unknown Traffic",
   "Normal Traffic",
@@ -246,7 +166,7 @@ function renderHTVC() {
   let ConfigHTVC = new Chart(HTVC, {
     type: "bar",
     data: {
-      labels: ["1 Month ago", "2 Months ago", "3 Months ago"],
+      labels: ["Month 1", "Month 2", "Month 3"],
       datasets: [
         {
           label: "Total",
@@ -322,7 +242,7 @@ function renderHTTC() {
       ],
       datasets: [
         {
-          label: "1 Month Ago",
+          label: " Month 1",
           data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
           fill: true,
           backgroundColor: "rgba(255, 99, 132, 0.1)",
@@ -331,7 +251,7 @@ function renderHTTC() {
           borderWidth: 2,
         },
         {
-          label: "2 Months Ago",
+          label: "Month 2",
           data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
           fill: true,
           backgroundColor: "rgba(51, 204, 51, 0.1)",
@@ -340,7 +260,7 @@ function renderHTTC() {
           borderWidth: 2,
         },
         {
-          label: "3 Months Ago",
+          label: "Month 3",
           data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
           fill: true,
           backgroundColor: "rgba(54, 162, 235, 0.1)",
