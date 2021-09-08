@@ -43,7 +43,7 @@ for (let i = 0; i < 10; i++) {
 
 loadDatabaseAnimation();
 
-IntervalTimer = setInterval(loadDatabaseAnimation, 50);
+IntervalTimer = setInterval(loadDatabaseAnimation, 20);
 
 function loadDatabaseAnimation() {
   let progressBar = document.querySelector("#prog-bar");
@@ -53,11 +53,15 @@ function loadDatabaseAnimation() {
   let recordspan = document.querySelector("#recordspan-info");
 
   progressBar.style.width = `${progressValue}%`;
-  progressBar.innerHTML = `${progressValue}%`;
+
   progressValue++;
 
+  if (progressValue > 50) {
+    progressBar.innerHTML = `${progressValue - 50}%`;
+  }
+
   //when the loading finished animation
-  if (progressValue == 101) {
+  if (progressValue >= 150) {
     clearInterval(IntervalTimer);
     renderHTVC();
     renderHTTC();
