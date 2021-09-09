@@ -5,7 +5,7 @@ let ClassifValues = [
   "Harmful Traffic",
 ];
 
-let CountryValues = ["United States", "India", "Russia", "China"];
+let CountryValues = ["USA", "India", "Russia", "China"];
 
 let AuthValues = [
   "PPP",
@@ -50,6 +50,9 @@ let ProtocolValues = [
   "TFTP",
 ];
 
+let currentDayOfMonth = new Date().getDate();
+let currentMonthMultiplicator = currentDayOfMonth / 31;
+
 let progressValue = 0;
 let IntervalTimer;
 
@@ -58,8 +61,6 @@ let dbsize = document.querySelector("#dbsize-info");
 let totalrecords = document.querySelector("#totalrecords-info");
 let recordsfound = document.querySelector("#recordsfound-info");
 let recordspan = document.querySelector("#recordspan-info");
-
-console.log(randAuthPicker());
 
 let tabledata = document.querySelector("#table-data");
 for (let i = 0; i < 10; i++) {
@@ -84,8 +85,6 @@ onPageLoadAnimation();
 IntervalTimer = setInterval(onPageLoadAnimation, 20);
 
 function onPageLoadAnimation() {
-  
-
   progressBar.style.width = `${progressValue}%`;
 
   progressValue++;
@@ -113,7 +112,9 @@ function onPageLoadAnimation() {
 
     //re-enable all disabled buttons
     let disabledButtons = document.querySelectorAll(".btn.disabled");
-    disabledButtons.forEach((buttons) => {buttons.classList.remove("disabled")});
+    disabledButtons.forEach((buttons) => {
+      buttons.classList.remove("disabled");
+    });
 
     //remove placeholders and plugin random data
     dbsize.classList.remove("placeholder");
@@ -127,7 +128,7 @@ function onPageLoadAnimation() {
 
     recordsfound.classList.remove("placeholder");
     recordsfound.innerHTML = `${totalrecords.innerHTML} Total Records Found`;
-    
+
     renderTableData();
   }
 }
@@ -138,7 +139,7 @@ function renderQueryTotal() {
 
 function renderTableData() {
   tabledata.innerHTML = ``;
-  
+
   for (let i = 0; i < 10; i++) {
     tabledata.innerHTML += `<tr>
 			<td>${randDay()}/${randMonth()}/${randYear()} - ${randHour()}:${randMinute()}</td>
@@ -166,11 +167,15 @@ function renderHTVC() {
   let ConfigHTVC = new Chart(HTVC, {
     type: "bar",
     data: {
-      labels: ["Month 1", "Month 2", "Month 3"],
+      labels: ["This Month", "1 Month Ago", "2 Months Ago"],
       datasets: [
         {
-          label: "Total",
-          data: [rand(), rand(), rand()],
+          label: "Normal Traffic",
+          data: [
+            Math.round(rand() * currentMonthMultiplicator),
+            rand(),
+            rand(),
+          ],
           backgroundColor: ["rgba(54, 162, 235, 0.2)"],
           borderColor: ["rgba(54, 162, 235, 1)"],
           borderWidth: 0.5,
@@ -178,8 +183,12 @@ function renderHTVC() {
         },
 
         {
-          label: "Medium Priority",
-          data: [rand2(), rand2(), rand2(), rand2(), rand2()],
+          label: "Suspicious Traffic",
+          data: [
+            Math.round(rand2() * currentMonthMultiplicator),
+            rand2(),
+            rand2(),
+          ],
 
           //other designing methods
           backgroundColor: ["rgba(255, 206, 86, 0.2)"],
@@ -189,10 +198,27 @@ function renderHTVC() {
         },
 
         {
-          label: "High Priority",
-          data: [rand2(), rand2(), rand2(), rand2(), rand2()],
+          label: "Harmful Traffic",
+          data: [
+            Math.round(rand2() * currentMonthMultiplicator),
+            rand2(),
+            rand2(),
+          ],
           backgroundColor: ["rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 0.5,
+          borderRadius: 3,
+        },
+
+        {
+          label: "Unknown Traffic",
+          data: [
+            Math.round(rand2() * currentMonthMultiplicator),
+            rand2(),
+            rand2(),
+          ],
+          backgroundColor: ["rgba(163, 163, 194, 0.2)"],
+          borderColor: ["rgba(163, 163, 194, 1)"],
           borderWidth: 0.5,
           borderRadius: 3,
         },
@@ -233,17 +259,24 @@ function renderHTTC() {
     type: "radar",
     data: {
       labels: [
-        "With Signature",
-        "UDP",
+        "Safe Authentication",
         "Risky Port",
-        "No Signature",
+        "Safe Protocol",
+        "Risky Authentication",
         "Safe Port",
-        "TCP",
+        "Risky Protocol",
       ],
       datasets: [
         {
-          label: " Month 1",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          label: " This Month",
+          data: [
+            Math.round(rand3() * currentMonthMultiplicator),
+            Math.round(rand3() * currentMonthMultiplicator),
+            Math.round(rand3() * currentMonthMultiplicator),
+            Math.round(rand3() * currentMonthMultiplicator),
+            Math.round(rand3() * currentMonthMultiplicator),
+            Math.round(rand3() * currentMonthMultiplicator),
+          ],
           fill: true,
           backgroundColor: "rgba(255, 99, 132, 0.1)",
           borderColor: "rgba(255, 99, 132, 0.5)",
@@ -251,7 +284,7 @@ function renderHTTC() {
           borderWidth: 2,
         },
         {
-          label: "Month 2",
+          label: "1 Month Ago",
           data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
           fill: true,
           backgroundColor: "rgba(51, 204, 51, 0.1)",
@@ -260,7 +293,7 @@ function renderHTTC() {
           borderWidth: 2,
         },
         {
-          label: "Month 3",
+          label: "2 Months Ago",
           data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
           fill: true,
           backgroundColor: "rgba(54, 162, 235, 0.1)",
