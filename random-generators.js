@@ -1,6 +1,12 @@
 let ClassifValues = [
   "Unknown Traffic",
   "Normal Traffic",
+  "Normal Traffic",
+  "Normal Traffic",
+  "Normal Traffic",
+  "Normal Traffic",
+  "Normal Traffic",
+  "Normal Traffic",
   "Supicious Traffic",
   "Harmful Traffic",
 ];

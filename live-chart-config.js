@@ -1,20 +1,48 @@
-//call this function again when the timer goes to 0
+// initially generate charts
 renderLTVC();
 renderLTTC();
 
 let countDownTimer = 59;
 let IntervalTimer;
+let TableDataIntervalTimer;
+
+let realTimeTrafficIsRunning = true;
 
 let LTVCtime = document.querySelector("#ltvc-timer");
 let LTTCtime = document.querySelector("#lttc-timer");
+let liveTable = document.querySelector("#live-table");
 
-let liveTableData = document.querySelector("#live-table-data");
-for (let i = 0; i < 10; i++) {
-  liveTableData.innerHTML += `<tr>
-			<td>${randDay()}/${randMonth()}/${randYear()} - ${randHour()}:${randMinute()}</td>
+let liveTableData = [];
+
+function generateRandomLiveData() {
+  let networkClassif = ClassifValues[randClassifPicker()];
+  let rowColor;
+
+  let date = new Date();
+  let Tday = date.getDate();
+  let Tmonth = date.getMonth();
+  let Tyear = date.getFullYear();
+  let Thour = date.getHours();
+  let Tmins = date.getMinutes();
+  let Tsecs = date.getSeconds();
+
+  if (networkClassif === "Normal Traffic") {
+    rowColor = `<tr style="background-color: rgba(54, 162, 235, 0.03);">`;
+  } else if (networkClassif === "Supicious Traffic") {
+    rowColor = `<tr style="background-color: rgba(255, 206, 86, 0.5);">`;
+  } else if (networkClassif === "Harmful Traffic") {
+    rowColor = `<tr style="background-color: rgba(255, 99, 132, 0.5);">`;
+  } else if (networkClassif === "Unknown Traffic") {
+    rowColor = `<tr style="background-color: rgba(163, 163, 194, 0.5);">`;
+  } else {
+    rowColor = `<tr>`;
+  }
+
+  liveTableData.unshift(`${rowColor}
+			<td>${Tday}/${Tmonth}/${Tyear} - ${Thour}:${Tmins}:${Tsecs}</td>
 			<td>${rand120()}:${rand50()}:${rand10()}</td>
 			<td>${rand100to600()}</td>
-			<td>${ClassifValues[randClassifPicker()]}</td>
+			<td>${networkClassif}</td>
 			<td>${AuthValues[randAuthPicker()]}</td>
 			<td>${rand10()}</td>
 			<td>${ProtocolValues[randProtocolPicker()]}</td>
@@ -23,7 +51,60 @@ for (let i = 0; i < 10; i++) {
 			<td>${rand255()}.${rand255()}.${rand255()}.${rand255()}</td>
 			<td>${rand1to1024()}</td>
 			<td>${CountryValues[randCountryPicker()]}</td>
-		</tr>`;
+		</tr>`);
+}
+
+//initially generate 10 rows of random live network data
+for (let i = 0; i < 10; i++) {
+  generateRandomLiveData();
+}
+
+function renderLiveTableData() {
+  liveTable.innerHTML = ``;
+  liveTableData.forEach((liveData) => {
+    liveTable.innerHTML += liveData;
+  });
+}
+
+//initially render 10 random table data
+renderLiveTableData();
+
+//initially run the real-time traffic
+runRealTimeTraffic();
+
+function pauseRealTimeTraffic() {
+  clearInterval(TableDataIntervalTimer);
+}
+
+function runRealTimeTraffic() {
+  //re-generate table data every 0.3 seconds
+  //simulating a real-time live network traffic
+  TableDataIntervalTimer = setInterval(() => {
+    liveTableData.pop();
+    generateRandomLiveData();
+    renderLiveTableData();
+  }, 250);
+}
+
+function PauseResumeToggle() {
+  realTimeTrafficIsRunning = !realTimeTrafficIsRunning;
+  console.log(realTimeTrafficIsRunning);
+
+  if (realTimeTrafficIsRunning) {
+    document.querySelector(
+      "#pause-resume-container"
+    ).innerHTML = `<button type="button" class="btn sky-blue mb-3" onclick="PauseResumeToggle();pauseRealTimeTraffic()"><i
+						class="far fa-pause-circle"></i>
+					Pause</button>`;
+  }
+
+  if (!realTimeTrafficIsRunning) {
+    document.querySelector(
+      "#pause-resume-container"
+    ).innerHTML = `<button type="button" class="btn sky-blue mb-3" onclick="PauseResumeToggle();runRealTimeTraffic()"><i
+						class="far fa-play-circle"></i>
+					Resume</button>`;
+  }
 }
 
 IntervalTimer = setInterval(beginCountDown, 1000);
