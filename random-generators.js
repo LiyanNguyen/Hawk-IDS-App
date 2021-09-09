@@ -1,3 +1,67 @@
+let ClassifValues = [
+  "Unknown Traffic",
+  "Normal Traffic",
+  "Supicious Traffic",
+  "Harmful Traffic",
+];
+
+let CountryValues = ["USA", "India", "Russia", "China"];
+
+let AuthValues = [
+  "PPP",
+  "PAP",
+  "CHAP",
+  "EAP",
+  "EAP-MD5",
+  "EAP-TLS",
+  "EAP-TTLS",
+  "EAP-FAST",
+  "EAP-PEAP",
+  "AAA",
+  "TACACS+",
+  "RADIUS",
+  "DIAMETER",
+  "AKA",
+  "CRAM-MD5",
+  "CAVE",
+  "NTLM",
+  "SAML",
+];
+
+let ProtocolValues = [
+  "TCP",
+  "UDP",
+  "IP",
+  "POP",
+  "SMTP",
+  "FTP",
+  "HTTP",
+  "HTTPS",
+  "ARP",
+  "DHCP",
+  "IMAP4",
+  "SIP",
+  "RTP",
+  "RLP",
+  "RAP",
+  "L2TP",
+  "PPTP",
+  "SNMP",
+  "TFTP",
+];
+
+let liveRand = () => {
+  return Math.round(Math.random() * 100 + 100);
+};
+
+let liveRand2 = () => {
+  return Math.round(Math.random() * 50 + 20);
+};
+
+let liveRand3 = () => {
+  return Math.round(Math.random() * 100);
+};
+
 let rand = () => {
   return Math.round(Math.random() * 1000 + 1000);
 };

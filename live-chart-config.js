@@ -1,35 +1,67 @@
-let rand = () => {
-  return Math.round(Math.random() * 100 + 100);
-};
-
-let rand2 = () => {
-  return Math.round(Math.random() * 50 + 20);
-};
-
-let rand3 = () => {
-  return Math.round(Math.random() * 100);
-};
-
 //call this function again when the timer goes to 0
-renderTrafficVolumeChart();
-renderTrafficTypesChart();
+renderLTVC();
+renderLTTC();
 
-function renderTrafficVolumeChart() {
-  let TFVC = document.querySelector("#TFVC");
-  let ConfigTFVC = new Chart(TFVC, {
+let countDownTimer = 59;
+let IntervalTimer;
+
+let LTVCtime = document.querySelector("#ltvc-timer");
+let LTTCtime = document.querySelector("#lttc-timer");
+
+let liveTableData = document.querySelector("#live-table-data");
+for (let i = 0; i < 10; i++) {
+  liveTableData.innerHTML += `<tr>
+			<td>${randDay()}/${randMonth()}/${randYear()} - ${randHour()}:${randMinute()}</td>
+			<td>${rand120()}:${rand50()}:${rand10()}</td>
+			<td>${rand100to600()}</td>
+			<td>${ClassifValues[randClassifPicker()]}</td>
+			<td>${AuthValues[randAuthPicker()]}</td>
+			<td>${rand10()}</td>
+			<td>${ProtocolValues[randProtocolPicker()]}</td>
+			<td>${rand255()}.${rand255()}.${rand255()}.${rand255()}</td>
+			<td>${rand1to1024()}</td>
+			<td>${rand255()}.${rand255()}.${rand255()}.${rand255()}</td>
+			<td>${rand1to1024()}</td>
+			<td>${CountryValues[randCountryPicker()]}</td>
+		</tr>`;
+}
+
+IntervalTimer = setInterval(beginCountDown, 1000);
+
+function beginCountDown() {
+  countDownTimer--;
+  LTVCtime.innerHTML = ` Chart will update in ${countDownTimer} second(s)`;
+  LTTCtime.innerHTML = ` Chart will update in ${countDownTimer} second(s)`;
+
+  if (countDownTimer === 0) {
+    LTVCtime.innerHTML = ` Updating...`;
+    LTTCtime.innerHTML = ` Updating...`;
+    renderLTVC();
+    renderLTTC();
+    countDownTimer = 60;
+  }
+}
+
+function renderLTVC() {
+  document.querySelector(
+    "#LTVCContainer"
+  ).innerHTML = `<canvas id="LTVC"></canvas>`;
+
+  let LTVC = document.querySelector("#LTVC");
+  let ConfigLTVC = new Chart(LTVC, {
     type: "bar",
     data: {
       labels: [
-        "1 Min ago",
-        "2 Mins ago",
-        "3 Mins ago",
-        "4 Mins ago",
-        "5 Mins ago",
+        "1 Min Ago",
+        "2 Mins Ago",
+        "3 Mins Ago",
+        "4 Mins Ago",
+        "5 Mins Ago",
       ],
       datasets: [
         {
-          label: "Total",
-          data: [rand(), rand(), rand(), rand(), rand()],
+          label: "Normal Traffic",
+          data: [liveRand(), liveRand(), liveRand(), liveRand(), liveRand()],
           backgroundColor: ["rgba(54, 162, 235, 0.2)"],
           borderColor: ["rgba(54, 162, 235, 1)"],
           borderWidth: 0.5,
@@ -37,8 +69,14 @@ function renderTrafficVolumeChart() {
         },
 
         {
-          label: "Medium Priority",
-          data: [rand2(), rand2(), rand2(), rand2(), rand2()],
+          label: "Suspicious Traffic",
+          data: [
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+          ],
 
           //other designing methods
           backgroundColor: ["rgba(255, 206, 86, 0.2)"],
@@ -48,10 +86,31 @@ function renderTrafficVolumeChart() {
         },
 
         {
-          label: "High Priority",
-          data: [rand2(), rand2(), rand2(), rand2(), rand2()],
+          label: "Harmful Traffic",
+          data: [
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+          ],
           backgroundColor: ["rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)"],
+          borderWidth: 0.5,
+          borderRadius: 3,
+        },
+
+        {
+          label: "Unknown Traffic",
+          data: [
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+            liveRand2(),
+          ],
+          backgroundColor: ["rgba(163, 163, 194, 0.2)"],
+          borderColor: ["rgba(163, 163, 194, 1)"],
           borderWidth: 0.5,
           borderRadius: 3,
         },
@@ -82,23 +141,34 @@ function renderTrafficVolumeChart() {
   });
 }
 
-function renderTrafficTypesChart() {
-  let fmtrc = document.querySelector("#myChart2");
-  let Configfmtrc = new Chart(fmtrc, {
+function renderLTTC() {
+  document.querySelector(
+    "#LTTCContainer"
+  ).innerHTML = `<canvas id="LTTC"></canvas>`;
+
+  let LTTC = document.querySelector("#LTTC");
+  let ConfigLTTC = new Chart(LTTC, {
     type: "radar",
     data: {
       labels: [
-        "With Signature",
-        "UDP",
+        "Safe Authentication",
         "Risky Port",
-        "No Signature",
+        "Safe Protocol",
+        "Risky Authentication",
         "Safe Port",
-        "TCP",
+        "Risky Protocol",
       ],
       datasets: [
         {
           label: "1 Min Ago",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          data: [
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+          ],
           fill: true,
           backgroundColor: "rgba(255, 99, 132, 0.1)",
           borderColor: "rgba(255, 99, 132, 0.5)",
@@ -107,7 +177,14 @@ function renderTrafficTypesChart() {
         },
         {
           label: "2 Mins Ago",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          data: [
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+          ],
           fill: true,
           backgroundColor: "rgba(51, 204, 51, 0.1)",
           borderColor: "rgba(51, 204, 51, 0.5)",
@@ -116,7 +193,14 @@ function renderTrafficTypesChart() {
         },
         {
           label: "3 Mins Ago",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          data: [
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+          ],
           fill: true,
           backgroundColor: "rgba(54, 162, 235, 0.1)",
           borderColor: "rgba(54, 162, 235, 0.5)",
@@ -125,7 +209,14 @@ function renderTrafficTypesChart() {
         },
         {
           label: "4 Mins Ago",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          data: [
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+          ],
           fill: true,
           backgroundColor: "rgba(153, 51, 255, 0.1)",
           borderColor: "rgba(153, 51, 255, 0.5)",
@@ -134,7 +225,14 @@ function renderTrafficTypesChart() {
         },
         {
           label: "5 Mins Ago",
-          data: [rand3(), rand3(), rand3(), rand3(), rand3(), rand3()],
+          data: [
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+            liveRand3(),
+          ],
           fill: true,
           backgroundColor: "rgba(255, 153, 51, 0.1)",
           borderColor: "rgba(255, 153, 51, 0.5)",
