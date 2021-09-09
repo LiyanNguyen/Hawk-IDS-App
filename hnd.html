@@ -39,28 +39,29 @@
 	</nav>
 	<!--Line Seperator (start)-->
 	<hr class="mx-2" style="margin-top: 4.5rem; color: #647380;">
-	<!--Alert Components-->
-	<div class="row mx-2">
-		<!--Warning Alert-->
-		<div class="alert snow-white alert-dismissible" role="alert">
-			<p class="card-text placeholder-glow">
-				<i class="fas fa-database"></i> Database size:
-				<span id="dbsize-info" class="placeholder col-1 fst-italic"></span>
-				<br>
-				<i class="far fa-list-alt"></i> Total records:
-				<span id="totalrecords-info" class="placeholder col-1 fst-italic"></span>
-				<br>
-				<i class="fas fa-history"></i> Record time-span:
-				<span id="recordspan-info" class="placeholder col-1 fst-italic"></span>
-				<br>
-			</p>
-			<hr>
-			<div id="DBLoadAnimation">
-				<div class="d-flex justify-content-center my-2">Loading Database...</div>
-				<div class="progress">
-					<div id="prog-bar" class="progress-bar progress-bar-striped progress-bar-animated else-blue"
-						style="width: 0%;">
-						<div class="d-flex justify-content-center">Initiating...</div>
+	<!--HND Overview Component-->
+	<div class="row mx-2 mb-3">
+		<div class="card snow-white">
+			<div class="card-body">
+				<p class="card-text placeholder-glow">
+					<i class="fas fa-database"></i> Database size:
+					<span id="dbsize-info" class="placeholder col-1 fst-italic"></span>
+					<br>
+					<i class="far fa-list-alt"></i> Total records:
+					<span id="totalrecords-info" class="placeholder col-1 fst-italic"></span>
+					<br>
+					<i class="fas fa-history"></i> Record time-span:
+					<span id="recordspan-info" class="placeholder col-1 fst-italic"></span>
+					<br>
+				</p>
+				<hr>
+				<div id="DBLoadAnimation">
+					<div class="d-flex justify-content-center my-2">Loading Database...</div>
+					<div class="progress">
+						<div id="prog-bar" class="progress-bar progress-bar-striped progress-bar-animated else-blue"
+							style="width: 0%;">
+							<div class="d-flex justify-content-center">Initiating...</div>
+						</div>
 					</div>
 				</div>
 			</div>
