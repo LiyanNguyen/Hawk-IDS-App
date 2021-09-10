@@ -64,6 +64,11 @@ function onPageLoadAnimation() {
       buttons.classList.remove("disabled");
     });
 
+    let disabledSelects = document.querySelectorAll(".form-select");
+    disabledSelects.forEach((selects) => {
+      selects.removeAttribute("disabled");
+    });
+
     //remove placeholders and plugin random data
     dbsize.classList.remove("placeholder");
     dbsize.innerHTML = `${rand()} MB`;
@@ -89,11 +94,27 @@ function renderTableData() {
   tabledata.innerHTML = ``;
 
   for (let i = 0; i < 10; i++) {
-    tabledata.innerHTML += `<tr>
+
+    let networkClassif = ClassifValues[randClassifPicker()];
+    let rowColor;
+
+    if (networkClassif === "Normal Traffic") {
+      rowColor = `<tr style="background-color: rgba(54, 162, 235, 0.03);">`;
+    } else if (networkClassif === "Supicious Traffic") {
+      rowColor = `<tr style="background-color: rgba(255, 206, 86, 0.5);">`;
+    } else if (networkClassif === "Harmful Traffic") {
+      rowColor = `<tr style="background-color: rgba(255, 99, 132, 0.5);">`;
+    } else if (networkClassif === "Unknown Traffic") {
+      rowColor = `<tr style="background-color: rgba(163, 163, 194, 0.5);">`;
+    } else {
+      rowColor = `<tr>`;
+    }
+
+    tabledata.innerHTML += `${rowColor}
 			<td>${randDay()}/${randMonth()}/${randYear()} - ${randHour()}:${randMinute()}</td>
 			<td>${rand120()}:${rand50()}:${rand10()}</td>
 			<td>${rand100to600()}</td>
-			<td>${ClassifValues[randClassifPicker()]}</td>
+			<td>${networkClassif}</td>
 			<td>${AuthValues[randAuthPicker()]}</td>
 			<td>${rand10()}</td>
 			<td>${ProtocolValues[randProtocolPicker()]}</td>

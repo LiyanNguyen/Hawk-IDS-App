@@ -39,22 +39,7 @@
 	</nav>
 	<!--Line Seperator (start)-->
 	<hr class="mx-2" style="margin-top: 4.5rem; color: #647380;">
-	<!--Alert Components-->
-	<div class="row mx-2">
-		<!--Warning Alert-->
-		<div class="alert alert-warning alert-dismissible" role="alert">
-			<i class="fas fa-exclamation-triangle"></i>
-			Traffic under <span class="fst-italic text-decoration-underline">medium priority</span> has entered the system!
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-		</div>
 
-		<!--Danger Alert-->
-		<div class="alert alert-danger alert-dismissible" role="alert">
-			<i class="fas fa-skull-crossbones"></i>
-			Traffic under <span class="fst-italic text-decoration-underline">high priority</span> has entered the system!
-			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-		</div>
-	</div>
 	<!--LNT  Traffic Volume and Traffic Types Component-->
 	<div class="row mx-0 g-3">
 		<div class="col-md-6">
@@ -72,7 +57,7 @@
 						</div>
 					</div>
 					<hr>
-					<select class="form-select">
+					<select class="form-select" onchange="renderLTVC()">
 						<option>Overall</option>
 						<option>USA</option>
 						<option>India</option>
@@ -97,7 +82,7 @@
 						</div>
 					</div>
 					<hr>
-					<select class="form-select">
+					<select class="form-select" onchange="renderLTTC()">
 						<option>Overall</option>
 						<option>USA</option>
 						<option>India</option>

@@ -132,17 +132,11 @@ function renderLTVC() {
   let ConfigLTVC = new Chart(LTVC, {
     type: "bar",
     data: {
-      labels: [
-        "1 Min Ago",
-        "2 Mins Ago",
-        "3 Mins Ago",
-        "4 Mins Ago",
-        "5 Mins Ago",
-      ],
+      labels: ["1 Min Ago", "2 Mins Ago", "3 Mins Ago"],
       datasets: [
         {
           label: "Normal Traffic",
-          data: [liveRand(), liveRand(), liveRand(), liveRand(), liveRand()],
+          data: [liveRand(), liveRand(), liveRand()],
           backgroundColor: ["rgba(54, 162, 235, 0.2)"],
           borderColor: ["rgba(54, 162, 235, 1)"],
           borderWidth: 0.5,
@@ -168,13 +162,7 @@ function renderLTVC() {
 
         {
           label: "Harmful Traffic",
-          data: [
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-          ],
+          data: [liveRand2(), liveRand2(), liveRand2()],
           backgroundColor: ["rgba(255, 99, 132, 0.2)"],
           borderColor: ["rgba(255, 99, 132, 1)"],
           borderWidth: 0.5,
@@ -183,13 +171,7 @@ function renderLTVC() {
 
         {
           label: "Unknown Traffic",
-          data: [
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-            liveRand2(),
-          ],
+          data: [liveRand2(), liveRand2(), liveRand2()],
           backgroundColor: ["rgba(163, 163, 194, 0.2)"],
           borderColor: ["rgba(163, 163, 194, 1)"],
           borderWidth: 0.5,
@@ -286,38 +268,6 @@ function renderLTTC() {
           backgroundColor: "rgba(54, 162, 235, 0.1)",
           borderColor: "rgba(54, 162, 235, 0.5)",
           pointBackgroundColor: "rgb(54, 162, 235)",
-          borderWidth: 2,
-        },
-        {
-          label: "4 Mins Ago",
-          data: [
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-          ],
-          fill: true,
-          backgroundColor: "rgba(153, 51, 255, 0.1)",
-          borderColor: "rgba(153, 51, 255, 0.5)",
-          pointBackgroundColor: "rgb(153, 51, 255)",
-          borderWidth: 2,
-        },
-        {
-          label: "5 Mins Ago",
-          data: [
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-            liveRand3(),
-          ],
-          fill: true,
-          backgroundColor: "rgba(255, 153, 51, 0.1)",
-          borderColor: "rgba(255, 153, 51, 0.5)",
-          pointBackgroundColor: "rgb(255, 153, 51)",
           borderWidth: 2,
         },
       ],
