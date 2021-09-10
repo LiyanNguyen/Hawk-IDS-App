@@ -21,24 +21,38 @@
 	<!--Navbar Component-->
 	<nav class="navbar navbar-expand-lg navbar-dark navy-blue fixed-top">
 		<div class="container-fluid">
-			<div class="dropdown">
-				<button class="btn snow-white" type="button" data-bs-toggle="dropdown"><i
-						class="fas fa-caret-down"></i></button>
-				<ul class="dropdown-menu snow-white">
-					<li class=""><a class="dropdown-item" href="index.html">Live Network Traffic</a></li>
-					<hr class="my-1 mx-2">
-					<li class=""><a class="dropdown-item" href="hnd.html">Historical Network Data</a></li>
-					<hr class="my-1 mx-2">
-					<li class=""><a class="dropdown-item" href="#">Quarantine Control</a></li>
-					<hr class="my-1 mx-2">
-					<li class=""><a class="dropdown-item">Logout</a></li>
-				</ul>
-			</div>
+			<button class="btn snow-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#MenuOffCanvas"><i class="fas fa-bars"></i></i></button>
 			<h5 class="text-white text-center col">Quarantine Control&emsp;&ensp;</h3>
 		</div>
 	</nav>
 	<!--Line Seperator (start)-->
 	<hr class="mx-2" style="margin-top: 4.5rem; color: #647380;">
+	<!--Offcanvas Component-->
+	<div class="offcanvas offcanvas-start snow-white" tabindex="-1" id="MenuOffCanvas" style="max-width: 70%;">
+		<div class="offcanvas-header justify-content-end">
+			<button type="button" class="btn sky-blue" data-bs-dismiss="offcanvas"><i class="fas fa-arrow-left"></i></button>
+		</div>
+		<div class="text-center my-2">
+			<img src="HawkIDS_small.png" class="img-fluid rounded" height="150" width="150">
+		</div>
+		<div class="d-flex justify-content-center my-2">
+			<h4 class="offcanvas-title">Hawk IDS</h4>
+		</div>
+		<div class="offcanvas-body">
+			<hr class="my-1 mx-2">
+			<a class="btn snow-white text-start col-12" href="index.html"><i class="far fa-clock"></i> Live Network
+				Traffic</a>
+			<hr class="my-1 mx-2">
+			<a class="btn snow-white text-start col-12" href="hnd.html"><i class="fas fa-history"></i> Historical Network
+				Data</a>
+			<hr class="my-1 mx-2">
+			<a class="btn snow-white text-start col-12" data-bs-dismiss="offcanvas"><i class="fas fa-shield-alt"></i>
+				Quarantine Control</a>
+			<hr class="my-1 mx-2">
+			<a class="btn snow-white text-start col-12"><i class="fas fa-sign-out-alt"></i> Logout</a>
+			<hr class="my-1 mx-2">
+		</div>
+	</div>
 	<!--Alert Components-->
 	<div class="row mx-2">
 		<div class="alert snow-white alert-dismissible" role="alert">
