@@ -90,7 +90,7 @@
 								<span class=" placeholder col-12" style="height: 40vh;"></span>
 						</p>
 					</ol>
-					<button type="button" class="btn sky-blue col-12 my-2 disabled">Create New Quarantine Rule</button>
+					<button type="button" class="btn sky-blue col-12 my-2 disabled" data-bs-toggle="modal" data-bs-target="#QRModal" onclick="createNewQuarantineRule()">Create New Quarantine Rule</button>
 				</div>
 			</div>
 		</div>
@@ -142,6 +142,48 @@
 						<span class=" placeholder col-12" style="height: 40vh;"></span>
 					</p>
 				</div>
+			</div>
+		</div>
+	</div>
+	<!--Quarantine Rule Modal Component-->
+	<div class="modal fade" id="QRModal" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content snow-white">
+				<div class="modal-header else-blue text-white">
+					<h5 class="modal-title">Create New Quarantine Rule</h5>
+					<button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+				</div>
+				<div class="modal-body">
+					<input id="QRNameInput" class="form-control mb-3" type="text" placeholder="Quarantine Rule Name">
+					<textarea id="QRConfigInput" class="form-control mb-3" type="text" placeholder="Network Configuration" rows="5" style="resize: none;"></textarea>
+					<div class="form-check my-2">
+						<input id="inlineRadio1" class="form-check-input" type="radio" name="QRPriorityOption" value="option1">
+						<label class="form-check-label" for="inlineRadio1">High Priority</label>
+					</div>
+					<div class="form-check my-2">
+						<input id="inlineRadio2" class="form-check-input" type="radio" name="QRPriorityOption" value="option2">
+						<label class="form-check-label" for="inlineRadio2">Medium Priority</label>
+					</div>
+					<div class="form-check my-2">
+						<input id="inlineRadio3" class="form-check-input" type="radio" name="QRPriorityOption" value="option3" checked>
+						<label class="form-check-label" for="inlineRadio3">Others</label>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn col sky-blue">Create</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--Toast Component-->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+		<div id="error-toast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header bg-danger text-white">
+				<strong class="me-auto">Invalid Entry</strong>
+				<button type="button" class="btn-close btn-close-white" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+			<div class="toast-body snow-white">
+				Hello, world! This is a toast message.
 			</div>
 		</div>
 	</div>
