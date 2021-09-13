@@ -103,22 +103,31 @@ function onPageLoadAnimation() {
 		disabledButtons.forEach((buttons) => {
 			buttons.classList.remove("disabled");
 		});
-
-		//remove placeholders and plugin random data
-		qrulesInfo.classList.remove("placeholder");
-		qrulesInfo.innerHTML = `${5}`;
-
-		qtrafficsInfo.classList.remove("placeholder");
-		qtrafficsInfo.innerHTML = `${rand4()}`;
-
-		recordspan.classList.remove("placeholder");
-		recordspan.innerHTML = `3 Months`;
-
+		
+		renderQuarantineInfo();
 		renderQuarantineStats();
 		renderQuarantineRules();
 		renderPriorities();
 		renderNotifications();
 	}
+}
+
+function renderQuarantineInfo() {
+	let totalTriggered = 0;
+
+	for (let i = 0; i < QuarantineRules.length; i++) {
+		totalTriggered += QuarantineRules[i].AmountTriggered
+	}
+
+  //remove placeholders and plugin random data
+  qrulesInfo.classList.remove("placeholder");
+  qrulesInfo.innerHTML = `${QuarantineRules.length}`;
+
+  qtrafficsInfo.classList.remove("placeholder");
+  qtrafficsInfo.innerHTML = `${totalTriggered}`;
+
+  recordspan.classList.remove("placeholder");
+  recordspan.innerHTML = `3 Months`;
 }
 
 function renderQuarantineStats() {
@@ -164,14 +173,18 @@ function renderQuarantineRules() {
 function renderPriorities() {
 	let mediumPrios = [];
 	let highPrios = [];
+	let otherPrios = [];
 	let MPLmarkup = ``;
 	let HPLmarkup = ``;
+	let OPmarkup = ``;
 
 	for (let i = 0; i < QuarantineRules.length; i++) {
 		if (QuarantineRules[i].Priority === "Medium") {
 			mediumPrios.push(QuarantineRules[i]);
 		} else if (QuarantineRules[i].Priority === "High") {
 			highPrios.push(QuarantineRules[i]);
+		} else if (QuarantineRules[i].Priority === "Others") {
+			otherPrios.push(QuarantineRules[i]);
 		}
 	}
 
@@ -181,6 +194,10 @@ function renderPriorities() {
 
 	for (let i = 0; i < highPrios.length; i++) {
 		HPLmarkup += `<li class="list-group-item">${highPrios[i].QRuleName}</li>`;
+	}
+
+	for (let i = 0; i < otherPrios.length; i++) {
+		OPmarkup += `<li class="list-group-item">${otherPrios[i].QRuleName}</li>`;
 	}
 
 	qprio.innerHTML = `
@@ -228,7 +245,7 @@ function renderPriorities() {
 				data-bs-parent="#PrioritiesAccordion">
 				<div class="accordion-body">
 					<ul class="list-group">
-						
+						${OPmarkup}
 					</ul>
 				</div>
 			</div>
@@ -318,6 +335,7 @@ function toggleNotifications(ElementID) {
 
 function deleteQuarantineRule(ruleIndex) {
 	QuarantineRules.splice(ruleIndex, 1);
+	renderQuarantineInfo();
 	renderQuarantineRules();
 	renderQuarantineStats();
 	renderPriorities();
@@ -351,16 +369,31 @@ function addNewRule() {
 	let newQRName = document.querySelector("#QRNameInput").value;
 	let newQRConfig = document.querySelector("#QRConfigInput").value;
 
+	let priorityOption1 = document.querySelector("#prio-opt1");
+	let priorityOption2 = document.querySelector("#prio-opt2");
+	let priorityOption3 = document.querySelector("#prio-opt3");
+
+	let newPriority;
+
+	if (priorityOption1.checked) {
+		newPriority = priorityOption1.value;
+	} else if (priorityOption2.checked) {
+		newPriority = priorityOption2.value;
+	} else if (priorityOption3.checked) {
+		newPriority = priorityOption3.value;
+	}
+
 	if (newQRName != "" && newQRConfig != "") {
 		QuarantineRules.push({
 			QRuleName: newQRName,
 			AmountTriggered: rand5(),
 			DateLastTriggered: `${randDay()}/${randMonth()}/${Tyear}`,
-			Priority: "Medium",
+			Priority: newPriority,
 			Activated: true,
 			QRuleConfig: newQRConfig,
 		});
 
+		renderQuarantineInfo();
 		renderQuarantineRules();
 		renderQuarantineStats();
 		renderPriorities();
@@ -374,8 +407,16 @@ function editQuarantineRule(ruleIndex) {
 	let QRName = document.querySelector("#QRNameInput");
 	QRName.value = QuarantineRules[ruleIndex].QRuleName;
 
-	let QRConfg = document.querySelector("#QRConfigInput");
-	QRConfg.value = QuarantineRules[ruleIndex].QRuleConfig;
+	let QRConfig = document.querySelector("#QRConfigInput");
+	QRConfig.value = QuarantineRules[ruleIndex].QRuleConfig;
+
+	if (QuarantineRules[ruleIndex].Priority === "High") {
+		document.querySelector("#prio-opt1").checked = true;
+	} else if (QuarantineRules[ruleIndex].Priority === "Medium") {
+		document.querySelector("#prio-opt2").checked = true;
+	} else if (QuarantineRules[ruleIndex].Priority === "Others") {
+		document.querySelector("#prio-opt3").checked = true;
+	}
 
 	document.querySelector(".modal-title").innerHTML = `Edit Quarantine Rule`;
 	document.querySelector(
@@ -387,9 +428,24 @@ function editRule(ruleIndex) {
 	let newQRName = document.querySelector("#QRNameInput").value;
 	let newQRConfig = document.querySelector("#QRConfigInput").value;
 
+	let priorityOption1 = document.querySelector("#prio-opt1");
+	let priorityOption2 = document.querySelector("#prio-opt2");
+	let priorityOption3 = document.querySelector("#prio-opt3");
+
+	let newPriority;
+	
 	if (newQRName != "" && newQRConfig != "") {
+		if (priorityOption1.checked) {
+			newPriority = priorityOption1.value;
+		} else if (priorityOption2.checked) {
+			newPriority = priorityOption2.value;
+		} else if (priorityOption3.checked) {
+			newPriority = priorityOption3.value;
+		}
+		
 		QuarantineRules[ruleIndex].QRuleName = newQRName;
 		QuarantineRules[ruleIndex].QRuleConfig = newQRConfig;
+		QuarantineRules[ruleIndex].Priority = newPriority;
 
 		renderQuarantineRules();
 		renderQuarantineStats();
